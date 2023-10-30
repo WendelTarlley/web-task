@@ -1,0 +1,13 @@
+html{
+    width: 100vW;
+    height: 100vh;
+}
+.toolbar-container{
+    width: 100vW;
+    display: flex;
+}
+
+.container-nome-usuario{
+    display: flex;
+    align-items: center;
+}

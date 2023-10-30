@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MenuComponent } from './componentes/menu/menu.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'web-task';
+
+  @ViewChild(MenuComponent) menuComponent: MenuComponent;
+
+  public isExpanded = false;
+
+  public toggleMenu() {
+    this.isExpanded = !this.isExpanded;
+  }
+
+  showName(){
+    this.isExpanded = true;
+    this.menuComponent.showName()
+  }
+  
+  hideName(){
+    this.isExpanded = false;
+    this.menuComponent.hideName();
+  }
 }

@@ -1,0 +1,13 @@
+.content-container {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 25px;
+  }
+  .sidenav-aberto {
+    width: 15vw;
+    height: 100vh;
+  }
+  .sidenav-fechado {
+    width: 5vw;
+    height: 100vh;
+}
