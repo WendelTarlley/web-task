@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MenuComponent } from './componentes/menu/menu.component';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,12 @@ import { MenuComponent } from './componentes/menu/menu.component';
 export class AppComponent {
 
   @ViewChild(MenuComponent) menuComponent: MenuComponent;
+  isAutenticado: any;
 
+  constructor(private authService: AuthService) {
+    this.isAutenticado = this.authService.isAuthenticated();
+  }
+  
   public isExpanded = false;
 
   public toggleMenu() {

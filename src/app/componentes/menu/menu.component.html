@@ -1,13 +1,13 @@
 <section class="container-sidenav">
 
-  <mat-list class="nav" *ngFor="let route of routeLinks">
+  <mat-list class="nav" *ngFor="let menu of menuItems">
     <a [ngClass]="{'botao-menu-aberto': isExpanded,'botao-menu-fechado':!isExpanded}"
     routerLinkActive="active-link"
-    routerLink="{{route.link}}"
+    routerLink="{{menu.link}}"
     class="hover"
     >
-      <mat-icon>{{route.icon}}</mat-icon>
-      <span *ngIf="isExpanded">{{route.name}}</span>
+      <mat-icon>{{menu.icone}}</mat-icon>
+      <span *ngIf="isExpanded">{{menu.nome}}</span>
     </a>
   </mat-list>
 </section>

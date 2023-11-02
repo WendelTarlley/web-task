@@ -8,16 +8,22 @@ import { LoginComponent } from './telas/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-import { HeaderComponent } from './telas/header/header.component';
+import { HeaderComponent } from './componentes/header/header.component';
 import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule }from '@angular/material/sidenav'
 import {MatMenuModule} from '@angular/material/menu';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { MenuService } from './services/menu.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { InterceptorInterceptor } from './interceptor.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
@@ -40,10 +46,16 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatListModule,
     HttpClientModule,
     MatTooltipModule,
+    MatFormFieldModule,
+    MatIconModule ,
+    ReactiveFormsModule,
+    MatInputModule ,
+    MatCheckboxModule,
   ],
   providers: [
     MenuService,
     HttpClient,
+    {provide:HTTP_INTERCEPTORS,    useClass:InterceptorInterceptor,    multi:true    }
 ],
   bootstrap: [AppComponent]
 })

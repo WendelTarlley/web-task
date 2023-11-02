@@ -7,10 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class MenuService {
 
-  readonly url = "http://localhost:3000/menu" 
+  readonly url = "http://localhost:8081/" 
   constructor(private http:HttpClient) { }
 
   getMenu():Observable<any>{
-    return this.http.get(this.url)
+    return this.http.get(this.url+"menu"
+      )
   }
 }

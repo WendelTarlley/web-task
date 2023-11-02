@@ -1,1 +1,27 @@
-<p>login works!</p>
+<div style="height: 100vh; width: 100vw; display: flex;
+align-items: center; justify-content: center;">
+
+  <form [formGroup]="formulario">
+    <div class="example-container" fxLayout="column" fxLayoutGap="20px">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="usuario">
+      </mat-form-field>
+      
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha">
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    <div fxLayout="row" fxLayoutGap="20px" fxFlexAlign="center" style="align-items: center;">
+          <mat-checkbox
+          class="example-margin"
+          formControlName="lembreMe">Lembre-me</mat-checkbox>
+          <a routerLink="#">Cadastre-se</a>
+    </div>
+    <button mat-raised-button (click)="login()">Logar</button>
+</div>
+</form>
+</div>

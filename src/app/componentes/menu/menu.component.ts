@@ -1,5 +1,6 @@
 
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MenuService } from 'src/app/services/menu.service';
 
 
 @Component({
@@ -7,7 +8,16 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent{
+export class MenuComponent implements OnInit{
+ 
+  menuItems: any
+
+  constructor(private menuService:MenuService){}
+  ngOnInit(): void {
+    this.menuService.getMenu().subscribe(
+      results => this.menuItems = results
+    )
+  }
 
   @Input() isExpanded: boolean;
   @Output() toggleMenu = new EventEmitter();
@@ -17,8 +27,8 @@ export class MenuComponent{
     { link: "locations", name: "Locations", icon: "account_balance" },
   ];
 
+  
   showName(){
-    console.log("filho")
     this.isExpanded = true
   }
   

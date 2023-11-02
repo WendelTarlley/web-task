@@ -3,16 +3,47 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
+import { LocalStorageService } from './services/local-storage.service';
 
 @Injectable()
 export class InterceptorInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private localStorageService:LocalStorageService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+  
+    const tokenDeAcesso = this.localStorageService.buscarItemLocalStorage('token');
+  
+    if(tokenDeAcesso !== null){
+
+      request = request.clone({
+        setHeaders:{
+          Authorization: `Bearer ${tokenDeAcesso}`
+        }
+      })
+    }else{
+      request = request.clone({
+        setHeaders:{
+          'Content-type':'application/json; charset=UTF-8'
+        }
+      })
+    }
+    return next.handle(request).pipe(
+      catchError((error:any) => {
+        if(error instanceof HttpErrorResponse){
+          if(error.status === 401 || error.status === 403){
+            this.localStorageService.deletarItemLocalStorage("token");
+          }
+        }
+
+        return throwError(error)
+      }
+      )
+      
+    );
   }
 }
