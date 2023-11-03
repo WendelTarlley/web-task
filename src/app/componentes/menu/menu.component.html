@@ -3,7 +3,7 @@
   <mat-list class="nav" *ngFor="let menu of menuItems">
     <a [ngClass]="{'botao-menu-aberto': isExpanded,'botao-menu-fechado':!isExpanded}"
     routerLinkActive="active-link"
-    routerLink="{{menu.link}}"
+    (click)="onClick(menu)"
     class="hover"
     >
       <mat-icon>{{menu.icone}}</mat-icon>

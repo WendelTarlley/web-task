@@ -23,6 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ConfiguracaoComponent } from './telas/configuracao/configuracao/configuracao.component';
+import { MenuConfiguracaoComponent } from './telas/configuracao/menu-configuracao/menu-configuracao.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -32,6 +35,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     LoginComponent,
     HeaderComponent,
     MenuComponent,
+    ConfiguracaoComponent,
+    MenuConfiguracaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule,
     MatInputModule ,
     MatCheckboxModule,
+    MatTabsModule,
   ],
   providers: [
     MenuService,

@@ -22,7 +22,8 @@ export class InterceptorInterceptor implements HttpInterceptor {
 
       request = request.clone({
         setHeaders:{
-          Authorization: `Bearer ${tokenDeAcesso}`
+          Authorization: `Bearer ${tokenDeAcesso}`,
+          'Content-type':'application/json; charset=UTF-8'
         }
       })
     }else{

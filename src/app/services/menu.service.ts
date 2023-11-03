@@ -14,4 +14,8 @@ export class MenuService {
     return this.http.get(this.url+"menu"
       )
   }
+  getMenuPorNome(menuNome:string):Observable<any>{
+    return this.http.get(`${this.url}menu/porNome?nomeMenu=${menuNome}`
+      )
+  }
 }

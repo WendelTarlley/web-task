@@ -1,5 +1,7 @@
 
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 import { MenuService } from 'src/app/services/menu.service';
 
 
@@ -12,7 +14,7 @@ export class MenuComponent implements OnInit{
  
   menuItems: any
 
-  constructor(private menuService:MenuService){}
+  constructor(private menuService:MenuService, private dataService:DataService,private router:Router){}
   ngOnInit(): void {
     this.menuService.getMenu().subscribe(
       results => this.menuItems = results
@@ -36,4 +38,9 @@ export class MenuComponent implements OnInit{
     this.isExpanded = false
   }
   
+  onClick(menuSelecionado:any){
+
+    this.dataService.setData(menuSelecionado);
+    this.router.navigate([menuSelecionado.link])
+  }
 }
