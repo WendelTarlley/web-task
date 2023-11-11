@@ -6,16 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MenuService {
-
+  
   readonly url = "http://localhost:8081/" 
   constructor(private http:HttpClient) { }
-
+  
   getMenu():Observable<any>{
     return this.http.get(this.url+"menu"
-      )
+    )
   }
   getMenuPorNome(menuNome:string):Observable<any>{
     return this.http.get(`${this.url}menu/porNome?nomeMenu=${menuNome}`
-      )
+    )
+  }
+
+  salvarMenu(menu):Observable<any> {
+    return this.http.post(`${this.url}menu`,menu)
   }
 }

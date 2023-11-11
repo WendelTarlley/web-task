@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Route, Router, Routes } from '@angular/router';
+import {  Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit{
 
    }
   ngOnInit(): void {
-    console.log(this.authService.isAuthenticated())
     if(this.authService.isAuthenticated){
       this.route.navigate(["/pagina-inicial"])
     }

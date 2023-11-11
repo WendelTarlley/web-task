@@ -1,0 +1,27 @@
+<div>
+    <form [formGroup]="formularioCriarEditarMenu">
+        <mat-form-field *ngIf="isEditar">
+            <mat-label>ID</mat-label>
+            <input matInput readonly formControlName="id">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Nome</mat-label>
+            <input matInput  formControlName="nome">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Link</mat-label>
+            <input matInput formControlName="link">
+        </mat-form-field> 
+        <div class="container-icone">
+            <button mat-fab (click)="abrirSelecaoIcone()">
+                <mat-icon>add</mat-icon>        
+            </button>
+            <mat-icon class="icone-selecionado" *ngIf="formularioCriarEditarMenu.get('icone').value">{{formularioCriarEditarMenu.get('icone').value}}</mat-icon>
+        </div>
+        
+    </form>
+    <div>
+        <button mat-raised-button (click)="salvarMenu(formularioCriarEditarMenu)">salvar novo Menu</button>
+        <button mat-raised-button (click)="cancelarEdicao()">Cancelar</button>
+    </div>
+</div>

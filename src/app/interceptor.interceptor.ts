@@ -8,11 +8,12 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { LocalStorageService } from './services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class InterceptorInterceptor implements HttpInterceptor {
 
-  constructor(private localStorageService:LocalStorageService) {}
+  constructor(private localStorageService:LocalStorageService, private router:Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
   
@@ -38,6 +39,7 @@ export class InterceptorInterceptor implements HttpInterceptor {
         if(error instanceof HttpErrorResponse){
           if(error.status === 401 || error.status === 403){
             this.localStorageService.deletarItemLocalStorage("token");
+            this.router.navigate(["/login"])
           }
         }
 

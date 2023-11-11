@@ -1,1 +1,47 @@
-<p>menu-configuracao works!</p>
+<div fxLayout="column" fxLayoutGap="20px">
+
+  <button mat-raised-button  class="tamanho-padrao-botoes-grande" (click)="cadastrarNovoMenu()" *ngIf="!isCriarEditarMenu"> Adicionar novo Menu</button>
+  
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!isCriarEditarMenu">
+    
+    <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+      
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+      
+      <!-- Name Column -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+      </ng-container>
+      
+      <!-- Weight Column -->
+      <ng-container matColumnDef="link">
+        <th mat-header-cell *matHeaderCellDef>Caminho de acesso </th>
+        <td mat-cell *matCellDef="let element"> {{element.link}} </td>
+  </ng-container>
+  
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="icone">
+    <th mat-header-cell *matHeaderCellDef> Icone </th>
+    <td mat-cell *matCellDef="let element"><mat-icon> {{element.icone}} </mat-icon></td>
+  </ng-container>
+  
+  <!-- SubMenu Column -->
+  <ng-container matColumnDef="subMenu">
+    <th mat-header-cell *matHeaderCellDef> Submenu </th>
+    <td mat-cell *matCellDef="let element"> {{element.icon}} </td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<app-criar-editar-menu (edicaoCancelada)="edicaoCancelada($event)" *ngIf="isCriarEditarMenu"></app-criar-editar-menu>
+</div>

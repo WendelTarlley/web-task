@@ -26,6 +26,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ConfiguracaoComponent } from './telas/configuracao/configuracao/configuracao.component';
 import { MenuConfiguracaoComponent } from './telas/configuracao/menu-configuracao/menu-configuracao.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import { CriarEditarMenuComponent } from './componentes/criar-editar-menu/criar-editar-menu.component';
+import {DialogModule} from '@angular/cdk/dialog';
+import { IconDialogComponent } from './componentes/dialog/icon-dialog/icon-dialog.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -37,6 +42,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MenuComponent,
     ConfiguracaoComponent,
     MenuConfiguracaoComponent,
+    CriarEditarMenuComponent,
+    IconDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,12 +64,15 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatInputModule ,
     MatCheckboxModule,
     MatTabsModule,
+    MatTableModule,
+    DialogModule,
+    ScrollingModule
   ],
   providers: [
     MenuService,
     HttpClient,
     {provide:HTTP_INTERCEPTORS,    useClass:InterceptorInterceptor,    multi:true    }
 ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

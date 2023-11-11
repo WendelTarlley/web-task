@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-menu-configuracao',
@@ -7,10 +7,24 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./menu-configuracao.component.css']
 })
 export class MenuConfiguracaoComponent implements OnInit{
-  constructor(private dataService:DataService){}
+  constructor(private menuService:MenuService){}
+  dataSource:any;
+  isCriarEditarMenu = true;
 
   ngOnInit(): void {
-    console.log(this.dataService.getData())
+    this.menuService.getMenu().subscribe(
+      result => this.dataSource = result
+    )
+    
   }
 
+ displayedColumns: string[] = ['id', 'nome', 'link', 'icone','subMenu'];
+
+ cadastrarNovoMenu(){
+  this.isCriarEditarMenu = true;
+ }
+
+ edicaoCancelada(event){
+  this.isCriarEditarMenu = event
+ }
 }

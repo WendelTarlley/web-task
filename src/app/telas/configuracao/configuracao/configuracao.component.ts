@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
+import { SubMenu } from 'src/app/domain/sub-menu';
+import { MenuService } from 'src/app/services/menu.service';
 import { MenuConfiguracaoComponent } from '../menu-configuracao/menu-configuracao.component';
 import { TelaInicialComponent } from '../../tela-inicial/tela-inicial.component';
-import { DataService } from 'src/app/services/data.service';
-import { SubMenu } from 'src/app/sub-menu';
-import { MenuService } from 'src/app/services/menu.service';
+import { ComponenteService } from 'src/app/services/componente.service';
 
 @Component({
   selector: 'app-configuracao',
@@ -11,20 +12,31 @@ import { MenuService } from 'src/app/services/menu.service';
   styleUrls: ['./configuracao.component.css']
 })
 export class ConfiguracaoComponent implements OnInit{
-  tabs: SubMenu[] = []
+  @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
-  constructor(private dataService:DataService,private menuService:MenuService){}
+  
+  tabItems = [
+  ];
+  
+  constructor(private dataService:DataService,private menuService:MenuService,private componenteService:ComponenteService){}
   ngOnInit(): void {
     let menu = this.dataService.getData();
     
     if (menu === null || menu === undefined) {
       this.menuService.getMenuPorNome("configuracao").subscribe(
-        result => this.tabs.push( result.submenu)
-      )
+        result => {
+          this.gerarComponente(result.submenu)
+          });      
     }else{
-      this.tabs.push( menu.submenu)
+      this.gerarComponente(menu.submenu)
     }
     
   }
-
+  
+  gerarComponente(menus:any) {
+    menus.forEach(element => {
+        this.tabItems.push({label:element.nome,content: this.componenteService.getComponente(element.nomeComponente)})
+    });
+  }
 }
+
