@@ -9,3 +9,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .tamanho-padrao-botoes-grande{
     width: 200px;
 }
+
+.balao-aviso-erro{
+    background-color: red;
+}
+
+.error.mat-mdc-snack-bar-container{
+    --mdc-snackbar-container-color: red;
+    --mat-mdc-snack-bar-button-color: white;
+}
+.sucesso.mat-mdc-snack-bar-container{
+    --mdc-snackbar-container-color: green;
+    --mat-mdc-snack-bar-button-color: white;
+}
+.aviso.mat-mdc-snack-bar-container{
+    --mdc-snackbar-container-color: orange;
+    --mat-mdc-snack-bar-button-color: white;
+}

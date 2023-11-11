@@ -31,6 +31,10 @@ import { CriarEditarMenuComponent } from './componentes/criar-editar-menu/criar-
 import {DialogModule} from '@angular/cdk/dialog';
 import { IconDialogComponent } from './componentes/dialog/icon-dialog/icon-dialog.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BalaoAvisoService } from './services/balao-aviso.service';
+import { NotificacaoComponent } from './componentes/notificacao/notificacao.component';
+
 
 
 @NgModule({
@@ -44,6 +48,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MenuConfiguracaoComponent,
     CriarEditarMenuComponent,
     IconDialogComponent,
+    NotificacaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,12 +71,14 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatTabsModule,
     MatTableModule,
     DialogModule,
-    ScrollingModule
+    ScrollingModule,
+    MatSnackBarModule,
   ],
   providers: [
     MenuService,
     HttpClient,
-    {provide:HTTP_INTERCEPTORS,    useClass:InterceptorInterceptor,    multi:true    }
+    {provide:HTTP_INTERCEPTORS,    useClass:InterceptorInterceptor,    multi:true    },
+    BalaoAvisoService
 ],
   bootstrap: [AppComponent],
 })

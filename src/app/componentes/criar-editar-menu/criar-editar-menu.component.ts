@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArquivoService } from 'src/app/services/arquivo.service';
 import { IconDialogComponent } from '../dialog/icon-dialog/icon-dialog.component';
 import { MenuService } from 'src/app/services/menu.service';
+import { BalaoAvisoService } from 'src/app/services/balao-aviso.service';
 
 @Component({
   selector: 'app-criar-editar-menu',
@@ -35,7 +36,7 @@ export class CriarEditarMenuComponent implements OnInit{
   arrayIcones: string[];
 
   constructor(private formBuilder:FormBuilder, private arquivoService:ArquivoService,
-    private dialog:Dialog, private menuService:MenuService){}
+    private dialog:Dialog, private menuService:MenuService, private balao_aviso:BalaoAvisoService){}
 
   ngOnInit(): void {
     this.formularioCriarEditarMenu = this.formBuilder.group({
@@ -62,6 +63,8 @@ export class CriarEditarMenuComponent implements OnInit{
 
     if(this.formularioCriarEditarMenu.valid){
       this.menuService.salvarMenu(JSON.stringify(formData)).subscribe()
+    }else{
+      this.balao_aviso.exibirBalaoErro("Verifique os campos obrigatórios!")
     }
   }
 
