@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MenuComponent } from './componentes/menu/menu.component';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { TransferenciaDeDadosService } from 'src/app/services/transferenciaDeDados/transferencia-de-dados.service';
 import { SubMenu } from 'src/app/domain/sub-menu';
-import { MenuService } from 'src/app/services/menu.service';
+import { MenuService } from 'src/app/services/api/menu/menu.service';
 import { MenuConfiguracaoComponent } from '../menu-configuracao/menu-configuracao.component';
 import { TelaInicialComponent } from '../../tela-inicial/tela-inicial.component';
-import { ComponenteService } from 'src/app/services/componente.service';
+import { ComponenteService } from 'src/app/services/componente/componente.service';
 
 @Component({
   selector: 'app-configuracao',
@@ -18,7 +18,7 @@ export class ConfiguracaoComponent implements OnInit{
   tabItems = [
   ];
   
-  constructor(private dataService:DataService,private menuService:MenuService,private componenteService:ComponenteService){}
+  constructor(private dataService:TransferenciaDeDadosService,private menuService:MenuService,private componenteService:ComponenteService){}
   ngOnInit(): void {
     let menu = this.dataService.getData();
     

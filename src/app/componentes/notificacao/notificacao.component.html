@@ -1,4 +1,9 @@
-    <div>
-        {{data.titulo}}
-    </div>
+    <div class="container-erro-botao-close">
+        <div>
+            {{data.titulo}}
+        </div>
+        <div class="container-botao-close">
+                <mat-icon (click)="snackBarRef.dismiss()" class="icone-close">close</mat-icon>
+        </div>
+        </div>
     <div>{{data.mensagem}}</div>

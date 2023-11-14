@@ -1,10 +1,11 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ArquivoService } from 'src/app/services/arquivo.service';
+import { ArquivoService } from 'src/app/services/arquivo/arquivo.service';
 import { IconDialogComponent } from '../dialog/icon-dialog/icon-dialog.component';
-import { MenuService } from 'src/app/services/menu.service';
-import { BalaoAvisoService } from 'src/app/services/balao-aviso.service';
+import { MenuService } from 'src/app/services/api/menu/menu.service';
+import { BalaoAvisoService } from 'src/app/services/notificacao/balao-aviso.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-criar-editar-menu',
@@ -14,7 +15,7 @@ import { BalaoAvisoService } from 'src/app/services/balao-aviso.service';
 export class CriarEditarMenuComponent implements OnInit{
 
   @Input() isCriarEditarMenu:boolean = true;
-  @Output() edicaoCancelada = new EventEmitter<any>
+  @Output() edicaoCanceladaOuFinalizada = new EventEmitter<any>
   
   getIconeFormulario(){
     return this.formularioCriarEditarMenu.get('icone').value
@@ -36,7 +37,7 @@ export class CriarEditarMenuComponent implements OnInit{
   arrayIcones: string[];
 
   constructor(private formBuilder:FormBuilder, private arquivoService:ArquivoService,
-    private dialog:Dialog, private menuService:MenuService, private balao_aviso:BalaoAvisoService){}
+    private iconeDialog:MatDialog, private menuService:MenuService, private balao_aviso:BalaoAvisoService){}
 
   ngOnInit(): void {
     this.formularioCriarEditarMenu = this.formBuilder.group({
@@ -50,11 +51,11 @@ export class CriarEditarMenuComponent implements OnInit{
 
   cancelarEdicao(){
     this.isCriarEditarMenu = false;
-    this.edicaoCancelada.emit(this.isCriarEditarMenu)
+    this.edicaoCanceladaOuFinalizada.emit(this.isCriarEditarMenu)
     this.formularioCriarEditarMenu.reset()
   }
 
-  salvarMenu(menu){
+  salvarMenu(){
     const formData = {
       nome: this.getNomeFormulario(),
       link: this.getLinkFormulario(),
@@ -62,7 +63,14 @@ export class CriarEditarMenuComponent implements OnInit{
     }
 
     if(this.formularioCriarEditarMenu.valid){
-      this.menuService.salvarMenu(JSON.stringify(formData)).subscribe()
+      this.menuService.salvarMenu(JSON.stringify(formData)).subscribe(
+        () =>{
+        this.balao_aviso.exibirBalaoSucesso("Menu salvo com sucesso!")
+        this.isCriarEditarMenu = false
+        this.finalizarEdicao()
+      },
+        () => this.balao_aviso.exibirBalaoErro('Eror ao salvar menu!')
+      )
     }else{
       this.balao_aviso.exibirBalaoErro("Verifique os campos obrigatórios!")
     }
@@ -72,14 +80,14 @@ export class CriarEditarMenuComponent implements OnInit{
     this.arquivoService.getArquivoIcones().subscribe(
       (data:string) => {
         this.arrayIcones = data.split(',')
-        const dialogRef = this.dialog.open(IconDialogComponent,{
+        const dialogRef = this.iconeDialog.open(IconDialogComponent,{
           maxHeight:'300px',
           maxWidth:'500px',
           data: this.arrayIcones
           
         })
         
-        dialogRef.closed.subscribe(
+        dialogRef.afterClosed().subscribe(
           result => {
             this.formularioCriarEditarMenu.get('icone').setValue(result)
           }
@@ -87,5 +95,10 @@ export class CriarEditarMenuComponent implements OnInit{
         }
       )
   }
+
+  finalizarEdicao(){
+    this.edicaoCanceladaOuFinalizada.emit(this.isCriarEditarMenu)
+  }
+
 }
 

@@ -10,5 +10,4 @@ export class NotificacaoComponent {
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data:any, public snackBarRef:MatSnackBarRef<NotificacaoComponent>){}
 
-
 }

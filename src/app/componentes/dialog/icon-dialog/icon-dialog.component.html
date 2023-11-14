@@ -1,4 +1,4 @@
     <div *ngFor="let item of arrayIcones">
-        <button (click)="dialogRef.close(item)" mat-fab >
+        <button [mat-dialog-close]="item" mat-fab >
         <mat-icon>{{item}}</mat-icon></button>
     </div>

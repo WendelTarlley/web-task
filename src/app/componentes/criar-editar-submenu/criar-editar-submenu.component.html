@@ -1,0 +1,23 @@
+<div>
+    <form [formGroup]="formularioCriarEditarSubMenu">
+        <mat-form-field *ngIf="isEditar">
+            <mat-label>ID</mat-label>
+            <input matInput readonly formControlName="id">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Nome</mat-label>
+            <input matInput  formControlName="nome">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Nome do Componente</mat-label>
+            <input matInput  formControlName="nomeComponente">
+        </mat-form-field>
+      
+        
+    </form>
+    <div>
+        <button mat-raised-button (click)="salvarSubMenu()" *ngIf="getIdFormulario()===null">Salvar novo SubMenu</button>
+        <button mat-raised-button (click)="salvarEdicaoSubMenu()" *ngIf="getIdFormulario()!==null">Salvar alterações do SubMenu</button>
+        <button mat-raised-button (click)="cancelarEdicao()">Cancelar</button>
+    </div>
+</div>

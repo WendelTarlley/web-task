@@ -1,0 +1,9 @@
+.container-erro-botao-close{
+    display: flex;
+    justify-content: space-between;
+}
+
+.icone-close {
+  font-size: 15px;
+   cursor: pointer;
+}

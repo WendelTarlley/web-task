@@ -1,0 +1,27 @@
+<div cdkDropListGroup>
+    <div class="example-container">
+        <h2>Available items</h2>
+
+        <div
+            cdkDropList
+            [cdkDropListData]="submenusSelecionados"
+            class="example-list"
+            cdkDropListSortingDisabled
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of submenusSelecionados" cdkDrag>{{item.nome}}</div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <h2>Shopping basket</h2>
+
+        <div
+            cdkDropList
+            [cdkDropListData]="listaSubmenus"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of listaSubmenus" cdkDrag>{{item.nome}}</div>
+        </div>
+    </div>
+</div>
+    <button mat-button  [mat-dialog-close]="submenusSelecionados" >Fechar seleção</button>

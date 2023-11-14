@@ -1,8 +1,8 @@
 
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
-import { MenuService } from 'src/app/services/menu.service';
+import { TransferenciaDeDadosService } from 'src/app/services/transferenciaDeDados/transferencia-de-dados.service';
+import { MenuService } from 'src/app/services/api/menu/menu.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit{
  
   menuItems: any
 
-  constructor(private menuService:MenuService, private dataService:DataService,private router:Router){}
+  constructor(private menuService:MenuService, private dataService:TransferenciaDeDadosService,private router:Router){}
   ngOnInit(): void {
     this.menuService.getMenu().subscribe(
       results => this.menuItems = results

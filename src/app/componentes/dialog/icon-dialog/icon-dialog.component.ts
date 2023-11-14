@@ -1,6 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
-import { ArquivoService } from 'src/app/services/arquivo.service';
+import { ArquivoService } from 'src/app/services/arquivo/arquivo.service';
 
 @Component({
   selector: 'app-icon-dialog',
@@ -20,10 +20,5 @@ export class IconDialogComponent implements OnInit{
     this.arquivoService.getArquivoIcones().subscribe(
       result => this.arrayIcones = result.split(',')
     )
-  }
-
-  selecionarIcone(iconeSelecionado){
-    debugger
-    this.dialogRef.close(iconeSelecionado)
   }
 }

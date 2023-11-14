@@ -14,7 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule }from '@angular/material/sidenav'
 import {MatMenuModule} from '@angular/material/menu';
 import { MenuComponent } from './componentes/menu/menu.component';
-import { MenuService } from './services/menu.service';
+import { MenuService } from './services/api/menu/menu.service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -32,8 +32,14 @@ import {DialogModule} from '@angular/cdk/dialog';
 import { IconDialogComponent } from './componentes/dialog/icon-dialog/icon-dialog.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { BalaoAvisoService } from './services/balao-aviso.service';
+import { BalaoAvisoService } from './services/notificacao/balao-aviso.service';
 import { NotificacaoComponent } from './componentes/notificacao/notificacao.component';
+import { DialogConfirmacaoComponent } from './componentes/dialog/dialog-confirmacao/dialog-confirmacao.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SubMenuComponent } from './telas/configuracao/sub-menu/sub-menu.component';
+import { CriarEditarSubmenuComponent } from './componentes/criar-editar-submenu/criar-editar-submenu.component';
+import { DialogDragAndDropComponent } from './componentes/dialog/dialog-drag-and-drop/dialog-drag-and-drop.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -49,6 +55,10 @@ import { NotificacaoComponent } from './componentes/notificacao/notificacao.comp
     CriarEditarMenuComponent,
     IconDialogComponent,
     NotificacaoComponent,
+    DialogConfirmacaoComponent,
+    SubMenuComponent,
+    CriarEditarSubmenuComponent,
+    DialogDragAndDropComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +83,8 @@ import { NotificacaoComponent } from './componentes/notificacao/notificacao.comp
     DialogModule,
     ScrollingModule,
     MatSnackBarModule,
+    MatDialogModule,
+    DragDropModule,
   ],
   providers: [
     MenuService,
