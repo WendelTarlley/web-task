@@ -10,7 +10,7 @@ import { BalaoAvisoService } from 'src/app/services/notificacao/balao-aviso.serv
 })
 export class CriarEditarSubmenuComponent {
 
-  getIdFormulario(){return this.formularioCriarEditarSubMenu.get('id').value}
+  getIdFormulario(){return this.formularioCriarEditarSubMenu.get('idSubMenu').value}
   getNomeFormulario(){return this.formularioCriarEditarSubMenu.get('nome').value}
   getNomeComponenteFormulario(){return this.formularioCriarEditarSubMenu.get('nomeComponente').value}
   getIdMenuFormulario(){return this.formularioCriarEditarSubMenu.get('menu').value.get('idMenu').value}
@@ -71,7 +71,7 @@ export class CriarEditarSubmenuComponent {
   salvarEdicaoSubMenu(){
     
     const formData = {
-      id: this.getIdFormulario(),
+      idSubMenu: this.getIdFormulario(),
       nome: this.getNomeFormulario(),
       nomeComponente: this.getNomeComponenteFormulario(),
       menu :{
@@ -79,7 +79,7 @@ export class CriarEditarSubmenuComponent {
         nomeMenu:this.getNomeMenuFormulario()
       }
     }
-debugger
+
     if(this.formularioCriarEditarSubMenu.valid){
       this.subMenuService.salvarAlteracaoSubMenu(JSON.stringify(formData)).subscribe(
         () =>{
@@ -102,15 +102,4 @@ debugger
   nomeDoBotaoSalvar():string{
     return this.getIdFormulario()===null?'Salvar novo SubMenu':"Salvar alteração SubMenu"
   }
-
-  
-  toJson(objeto){
-    debugger
-    return JSON.stringify(objeto.value, (key, value) => {
-       if (key === '_parent') {
-         return undefined;
-       }
-       return value;
-     });
-    }
 }

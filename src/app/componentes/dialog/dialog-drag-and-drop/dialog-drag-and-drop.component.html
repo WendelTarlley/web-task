@@ -1,6 +1,6 @@
-<div cdkDropListGroup>
-    <div class="example-container">
-        <h2>Available items</h2>
+<div cdkDropListGroup style="width: 500px; height: 500px;">
+    <div class="example-container" *ngIf="(submenusSelecionados && submenusSelecionados.length > 0) || (listaSubmenus && listaSubmenus.length > 0)">
+        <h2>Submenus selecionados</h2>
 
         <div
             cdkDropList
@@ -12,8 +12,8 @@
         </div>
     </div>
 
-    <div class="example-container">
-        <h2>Shopping basket</h2>
+    <div class="example-container" *ngIf="(submenusSelecionados && submenusSelecionados.length > 0) || (listaSubmenus && listaSubmenus.length > 0)">
+        <h2>SubMenus não selecionados</h2>
 
         <div
             cdkDropList
@@ -22,6 +22,10 @@
             (cdkDropListDropped)="drop($event)">
             <div class="example-box" *ngFor="let item of listaSubmenus" cdkDrag>{{item.nome}}</div>
         </div>
+    </div>
+    
+    <div *ngIf="!(submenusSelecionados && submenusSelecionados.length > 0) && !(listaSubmenus && listaSubmenus.length > 0)">
+        <p>Não existem Submenus sem associação a Menu</p>
     </div>
 </div>
     <button mat-button  [mat-dialog-close]="submenusSelecionados" >Fechar seleção</button>

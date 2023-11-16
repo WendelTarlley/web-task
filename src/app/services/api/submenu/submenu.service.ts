@@ -7,7 +7,6 @@ import { environment } from 'src/app/environment';
   providedIn: 'root'
 })
 export class SubmenuService {
-  
 
   private readonly URLBASE: string = environment.apiUrl;
 
@@ -17,6 +16,10 @@ export class SubmenuService {
 
   buscarSubMenus():Observable<any>{
     return this.http.get(`${this.URLBASE}submenu`)
+  }
+
+  buscarSubMenusSemMenu():Observable<any>{
+    return this.http.get(`${this.URLBASE}submenu/semMenu`)
   }
 
   buscarSubMenuPorNome(submenuNome:string):Observable<any>{

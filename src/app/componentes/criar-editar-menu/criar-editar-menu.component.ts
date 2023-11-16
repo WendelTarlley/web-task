@@ -13,24 +13,15 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./criar-editar-menu.component.css']
 })
 export class CriarEditarMenuComponent implements OnInit{
+  getIdMenuFormulario(){return this.formularioCriarEditarMenu.get('idMenu').value}
+  getIconeFormulario(){return this.formularioCriarEditarMenu.get('icone').value}
+  getNomeFormulario(){return this.formularioCriarEditarMenu.get('nome').value}
+  getLinkFormulario(){return this.formularioCriarEditarMenu.get('link').value}
+
 
   @Input() isCriarEditarMenu:boolean = true;
   @Output() edicaoCanceladaOuFinalizada = new EventEmitter<any>
-  
-  getIconeFormulario(){
-    return this.formularioCriarEditarMenu.get('icone').value
-
-  }
-
-  getNomeFormulario(){
-    return this.formularioCriarEditarMenu.get('nome').value
-
-  }
-
-  getLinkFormulario(){
-    return this.formularioCriarEditarMenu.get('link').value
-
-  }
+  @Input() formularioMenuEditar
 
   formularioCriarEditarMenu : FormGroup;
   isEditar = true;
@@ -40,13 +31,18 @@ export class CriarEditarMenuComponent implements OnInit{
     private iconeDialog:MatDialog, private menuService:MenuService, private balao_aviso:BalaoAvisoService){}
 
   ngOnInit(): void {
-    this.formularioCriarEditarMenu = this.formBuilder.group({
-      id:[null],
-      nome:[null,[Validators.min(5),Validators.required]],
-      link:[null,[Validators.min(5),Validators.required,Validators.pattern("^[a-z_-]*$")]],
-      icone:[null,Validators.required]
-    })
-  }
+    if (this.formularioMenuEditar === undefined) {
+      
+      this.formularioCriarEditarMenu = this.formBuilder.group({
+        idMenu:[null],
+        nome:[null,[Validators.min(5),Validators.required]],
+        link:[null,[Validators.min(5),Validators.required,Validators.pattern("^[a-z_-]*$")]],
+        icone:[null,Validators.required]
+      })
+    }else{
+      this.formularioCriarEditarMenu = this.formularioMenuEditar
+    }
+    }
 
 
   cancelarEdicao(){
@@ -76,6 +72,28 @@ export class CriarEditarMenuComponent implements OnInit{
     }
   }
 
+  salvarEdicaoMenu(){
+    
+    const formData = {
+      idMenu: this.getIdMenuFormulario(),
+      nome: this.getNomeFormulario(),
+      link: this.getLinkFormulario(),
+      icone: this.getIconeFormulario()
+    }
+
+    if(this.formularioCriarEditarMenu.valid){
+      this.menuService.atualizarMenu(JSON.stringify(formData)).subscribe(
+        () =>{
+        this.balao_aviso.exibirBalaoSucesso("Alteração salva com sucesso!")
+        this.isCriarEditarMenu = false
+        this.finalizarEdicao()
+      },
+        () => this.balao_aviso.exibirBalaoErro('Eror ao salvar submenu!')
+      )
+    }else{
+      this.balao_aviso.exibirBalaoErro("Verifique os campos obrigatórios!")
+    }
+  }
   abrirSelecaoIcone(){
     this.arquivoService.getArquivoIcones().subscribe(
       (data:string) => {

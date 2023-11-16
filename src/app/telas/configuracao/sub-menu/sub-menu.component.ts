@@ -40,14 +40,14 @@ export class SubMenuComponent implements OnInit{
   deletarSubMenu(submenu){
     const dialogRef = this.delecaoDialog.open(DialogConfirmacaoComponent,{
       data:{
-        mensagem:`Deseja deletar o menu de id: ${submenu.id} e nome ${submenu.nome}`
+        mensagem:`Deseja deletar o menu de id: ${submenu.idSubMenu} e nome ${submenu.nome}`
       }
     })
     dialogRef.afterClosed().subscribe(
       result => {
         if (result) {
-          this.submenuservice.deletarSubMenu(submenu.id).subscribe(
-            () => {this.notificacao.exibirBalaoSucesso(`Submenu de id: ${submenu.id} deletado com sucesso`)
+          this.submenuservice.deletarSubMenu(submenu.idSubMenu).subscribe(
+            () => {this.notificacao.exibirBalaoSucesso(`Submenu de id: ${submenu.idSubMenu} deletado com sucesso`)
                   this.buscarSubMenus()
           },
             () => this.notificacao.exibirBalaoErro("Ocorreu um erro ao excluir o item.")

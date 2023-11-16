@@ -15,7 +15,7 @@ export class DialogDragAndDropComponent implements OnInit{
   submenusSelecionados;
   listaSubmenus;
   ngOnInit(): void {
-    debugger
+    
    this. submenusSelecionados = this.data.submenusSelecionados
 
    this.listaSubmenus = this.data.opcoesSubMenu

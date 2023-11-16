@@ -6,8 +6,7 @@ import { environment } from 'src/app/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MenuService {
-  
+export class MenuService { 
   
   private readonly URLBASE: string = environment.apiUrl;
   constructor(private http:HttpClient) { }

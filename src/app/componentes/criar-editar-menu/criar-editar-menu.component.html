@@ -2,7 +2,7 @@
     <form [formGroup]="formularioCriarEditarMenu">
         <mat-form-field *ngIf="isEditar">
             <mat-label>ID</mat-label>
-            <input matInput readonly formControlName="id">
+            <input matInput readonly formControlName="idMenu">
         </mat-form-field>
         <mat-form-field >
             <mat-label>Nome</mat-label>
@@ -21,7 +21,7 @@
         
     </form>
     <div>
-        <button mat-raised-button (click)="salvarMenu()">salvar novo Menu</button>
-        <button mat-raised-button (click)="cancelarEdicao()">Cancelar</button>
+        <button mat-raised-button (click)="salvarMenu()" *ngIf="getIdMenuFormulario()===null">Salvar novo Menu</button>
+        <button mat-raised-button (click)="salvarEdicaoMenu()" *ngIf="getIdMenuFormulario()!==null">Salvar alterações do Menu</button>        <button mat-raised-button (click)="cancelarEdicao()">Cancelar</button>
     </div>
 </div>

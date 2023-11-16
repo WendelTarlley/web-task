@@ -42,7 +42,6 @@ import { DialogDragAndDropComponent } from './componentes/dialog/dialog-drag-and
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
