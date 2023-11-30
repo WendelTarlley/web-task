@@ -1,0 +1,20 @@
+<section class="example-section">
+  <span class="example-list-section" *ngIf="subTarefas">
+    <mat-checkbox
+                  [checked]="allComplete"
+                  [indeterminate]="someComplete()"
+                  (change)="setAll($event.checked)">
+      Marcar todas
+    </mat-checkbox>
+  </span>
+  <span class="example-list-section" *ngIf="subTarefas">
+   
+          <div *ngFor="let item of subTarefas">
+
+            <mat-checkbox [(ngModel)]="item.finalizada"
+            (ngModelChange)="updateAllComplete()">
+            {{item.nome}}
+          </mat-checkbox>
+        </div>
+  </span>
+</section>

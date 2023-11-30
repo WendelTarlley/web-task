@@ -1,0 +1,78 @@
+<div class="container-kanban" fxLayout="row">
+
+<div cdkDropListGroup>
+  <div class="example-container">
+    <div fxLayout.lt-xl="row" fxLayoutAlign.lt-xl="space-between">
+
+      <h2>To do</h2>
+      <button mat-icon-button (click)="adicionarNovaTarefa()"><mat-icon>add</mat-icon></button>
+    </div>
+
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[doingList,testList,doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+      id="todo">
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>
+        <app-card-kanban [toDo]="item"></app-card-kanban>
+      </div>
+
+    </div>
+  </div>
+  <div class="example-container">
+    <h2>Doing</h2>
+
+    <div
+      cdkDropList
+      #doingList="cdkDropList"
+      [cdkDropListData]="doing"
+      [cdkDropListConnectedTo]="[todoList,testList,doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+      id="doing">
+      <div class="example-box" *ngFor="let item of doing" cdkDrag>
+        <app-card-kanban [toDo]="item"></app-card-kanban>
+      </div>
+
+    </div>
+  </div>
+  <div class="example-container">
+    <h2>Test</h2>
+
+    <div
+      cdkDropList
+      #testList="cdkDropList"
+      [cdkDropListData]="test"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListConnectedTo]="[doingList,todoList,doneList]"
+
+      id="test">
+      <div class="example-box" *ngFor="let item of test" cdkDrag>
+        <app-card-kanban [toDo]="item"></app-card-kanban>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Done</h2>
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList,testList,doingList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+      id="done">
+      <div class="example-box" *ngFor="let item of done" cdkDrag>
+        <app-card-kanban [toDo]="item"></app-card-kanban>
+        </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -4,11 +4,13 @@ import { TelaInicialComponent } from './telas/tela-inicial/tela-inicial.componen
 import { LoginComponent } from './telas/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { ConfiguracaoComponent } from './telas/configuracao/configuracao/configuracao.component';
+import { KanbanComponent } from './telas/kanban/kanban.component';
 const routes: Routes = [
   {path:'',component:TelaInicialComponent,canActivate:[AuthGuard]},
   {path:'pagina-inicial',component:TelaInicialComponent,canActivate:[AuthGuard]},
   {path:'login',component:LoginComponent},
   {path:'configuracao',component:ConfiguracaoComponent,canActivate:[AuthGuard]},
+  {path:'kanban',component:KanbanComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({

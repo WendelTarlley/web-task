@@ -22,7 +22,6 @@ export class MenuComponent implements OnInit{
   }
 
   @Input() isExpanded: boolean;
-  @Output() toggleMenu = new EventEmitter();
 
   public routeLinks = [
     { link: "pagina-inicial", name: "About", icon: "dashboard" },

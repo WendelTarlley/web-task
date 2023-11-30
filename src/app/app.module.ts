@@ -19,7 +19,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { InterceptorInterceptor } from './interceptor.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -40,6 +40,11 @@ import { SubMenuComponent } from './telas/configuracao/sub-menu/sub-menu.compone
 import { CriarEditarSubmenuComponent } from './componentes/criar-editar-submenu/criar-editar-submenu.component';
 import { DialogDragAndDropComponent } from './componentes/dialog/dialog-drag-and-drop/dialog-drag-and-drop.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { KanbanComponent } from './telas/kanban/kanban.component';
+import {MatCardModule} from '@angular/material/card';
+import { CardKanbanComponent } from './componentes/card-kanban/card-kanban.component';
+import { SubTarefaComponent } from './componentes/sub-tarefa/sub-tarefa.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -58,6 +63,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     SubMenuComponent,
     CriarEditarSubmenuComponent,
     DialogDragAndDropComponent,
+    KanbanComponent,
+    CardKanbanComponent,
+    SubTarefaComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +92,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatSnackBarModule,
     MatDialogModule,
     DragDropModule,
+    MatCardModule,
+    FormsModule,
+    MatProgressBarModule,
   ],
   providers: [
     MenuService,
