@@ -18,7 +18,6 @@ export class KanbanComponent implements OnInit{
   constructor(private tarefaService:TarefaService,private notificacao:BalaoAvisoService){}
 
   ngOnInit(): void {
-    debugger
     this.tarefaService.buscarTarefasPorStatus(StatusTarefa.ToDo).subscribe(
       (result) => this.todo = result
     )

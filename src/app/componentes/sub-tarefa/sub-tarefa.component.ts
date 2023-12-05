@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SubTarefa } from 'src/app/domain/sub-tarefa';
+import { BalaoAvisoService } from 'src/app/services/notificacao/balao-aviso.service';
+import { SubTarefaService } from 'src/app/services/sub-tarefa/sub-tarefa.service';
 
 @Component({
   selector: 'app-sub-tarefa',
@@ -12,7 +14,7 @@ export class SubTarefaComponent implements OnInit {
 
   @Input() subTarefas:SubTarefa[]
   @Output() alteracaoSubTarefas = new EventEmitter<any>
-  constructor() { }
+  constructor(private subTarefaService:SubTarefaService, private notificacao:BalaoAvisoService) { }
 
   ngOnInit() {
   }
@@ -42,6 +44,13 @@ setAll(finalizada: boolean) {
 }
 
   atualizarSubTarefas(){
+    debugger
+    this.salvarSubTarefas(this.subTarefas)
     this.alteracaoSubTarefas.emit(this.subTarefas)
+  }
+  salvarSubTarefas(subTarefas: SubTarefa[]) {
+    this.subTarefaService.salvarSubTarefas(subTarefas).subscribe(
+      {error:() => this.notificacao.exibirBalaoErro("Não foi possível salvar a alteração feita!")}
+    )
   }
 }
