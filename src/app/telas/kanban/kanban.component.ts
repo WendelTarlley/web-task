@@ -48,7 +48,7 @@ export class KanbanComponent implements OnInit{
         event.currentIndex,
       );
       this.alterarStatusTarefa(event.container)
-      this.salvarAlteraçãoStatusTarefa(event.container.data)
+      this.salvarAlteraçãoStatusTarefa(event.container.data[0])
     }
   }
   salvarAlteraçãoStatusTarefa(data) {
